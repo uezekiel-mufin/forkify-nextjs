@@ -5,15 +5,24 @@ import {FaRegBookmark } from 'react-icons/fa';
 import {FiEdit } from 'react-icons/fi';
 
 
-const Navbar = () => {
+const Navbar = ({setSearchDetails,currentPage, setCurrentPage}) => {
+  const [inputText, setInputText]=useState('')
+
+  const handleClick=(e)=>{
+    e.preventDefault()
+    setCurrentPage(1)
+    setSearchDetails(inputText)
+  }
+ 
   return (
    <div className='header'>
     <Image src='/img/logo.png' alt='logo' width={150} height={50}/>
-    <form className="flex search justify-between gap-4 pl-10 ">
+    <form onSubmit={(e)=>handleClick(e)} className="flex search justify-between gap-4 pl-10 ">
        <input
          type="text"
          placeholder="Search over 1,000,000 recipes..."
          className='h-[23px] text-[1.7rem] flex-1 focus:outline-none '
+         onChange={(e)=>setInputText(e.target.value)}
        />
       <button className="flex w-[173.52px] h-[53px] justify-evenly items-center  text-4xl bg-bgHeaderButton rounded-full text-white font-medium">
         <AiOutlineSearch/>

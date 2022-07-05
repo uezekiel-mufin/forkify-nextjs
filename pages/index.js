@@ -5,16 +5,38 @@ import RecipeViews from '../public/components/RecipeViews'
 import SearchResults from '../public/Components/SearchResults'
 import HomePage from './HomePage'
 
-export default function Home({data}) {
+export default function Home() {
+  const [searchDetails,setSearchDetails]=useState('')
   const [fetchedRecipes, setFetchedRecipes]= useState([])
-  
-  useEffect(()=>{
+  const [currentPage, setCurrentPage]=useState(1)
+  console.log(searchDetails)
+
+
+const getRecipes =async()=>{
+  try {
+    const response = await fetch(`https://forkify-api.herokuapp.com/api/search?q=${searchDetails}`)
+    const data = await response.json()
     const {recipes} = data;
-    console.log(recipes)
     setFetchedRecipes(recipes)
-  },[])
-  console.log(data)
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
   console.log(fetchedRecipes)
+useEffect(()=>{
+  getRecipes()
+},[searchDetails])
+
+  // useEffect(()=>{
+  //   const {recipes} = data;
+  //   console.log(recipes)
+  //   setFetchedRecipes(recipes)
+  // },[])
+  // console.log(data)
+  // console.log(fetchedRecipes)
 
 
   return (
@@ -22,9 +44,9 @@ export default function Home({data}) {
     //  <HomePage/>
     // </div>
     <div className='container min-h-[117rem] m-0  bg-bgContainer py-20 px-60'>
-    <Navbar/>
+    <Navbar setSearchDetails={setSearchDetails} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
     <div className='main__section '>
-     <SearchResults fetchedRecipes={fetchedRecipes}/>
+     <SearchResults fetchedRecipes={fetchedRecipes} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
      <section className='main'>
       <RecipeViews/>
       <HowToCook/>
@@ -34,12 +56,12 @@ export default function Home({data}) {
   )
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`https://forkify-api.herokuapp.com/api/search?q=pizza`)
-  const data = await res.json()
-  return {
-    props: {
-      data,
-    },
-  }
-}
+// export async function getStaticProps() {
+//   const res = await fetch(`https://forkify-api.herokuapp.com/api/search?q=pizza`)
+//   const data = await res.json()
+//   return {
+//     props: {
+//       data,
+//     },
+//   }
+// }

@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 
-const SearchResults = ({fetchedRecipes}) => {
-  const [currentPage, setCurrentPage]=useState(1)
+const SearchResults = ({fetchedRecipes, currentPage, setCurrentPage}) => {
+  console.log(currentPage)
   const pageLimit = 10
 
   const start =( currentPage - 1 ) * pageLimit;
   const end = ( start + pageLimit )  ;
-  console.log(start,end)
 
-  const pages = +Math.ceil(fetchedRecipes.length / (pageLimit))
-  console.log(pages)
+  const pages = +Math.ceil(fetchedRecipes?.length / (pageLimit))
   const prev =(e)=>{
     const target = e.target;
     if(target.closest('.btn-prev') && currentPage > 1){
@@ -22,7 +20,7 @@ const SearchResults = ({fetchedRecipes}) => {
       if(target.closest('.btn-next') && currentPage <= pages - 1){
         setCurrentPage(currentPage + 1)
         if(currentPage === pages)return
-        console.log(currentPage)
+      
       }
   }
 
