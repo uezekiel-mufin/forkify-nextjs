@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Image from 'next/image'
 import {AiOutlineSearch } from 'react-icons/ai';
 import {FaRegBookmark } from 'react-icons/fa';
