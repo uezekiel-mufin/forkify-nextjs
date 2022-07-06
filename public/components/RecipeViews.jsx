@@ -15,11 +15,17 @@ const [isClicked,setIsClicked]=useState(false)
 
 //changing the quantity of the ingredients when the servings changes
 
-const handleClick=()=>{
+const increaseServings=()=>{
   setRecipeServings((prev)=>prev+1)
   recipeIngredients.forEach((item)=>{
-  // item.quantity = Math.ceil( item.quantity * ((recipeServings + 1) / recipeServings))
   item.quantity =  (item.quantity * ((recipeServings + 1) / recipeServings)).toFixed(2)
+})
+console.log(recipeIngredients)
+}
+const reduceServings=()=>{
+  setRecipeServings((prev)=>prev-1)
+  recipeIngredients.forEach((item)=>{
+  item.quantity =  (item.quantity * ((recipeServings - 1) / recipeServings)).toFixed(2)
 })
 console.log(recipeIngredients)
 }
@@ -58,8 +64,8 @@ useEffect(()=>{
         <div  className='flex gap-4 items-center'>
           <span className='text-[2.75rem] uppercase text-[#f38e82]'><BsPeople/></span>
           <span className='text-[1.75rem] uppercase'>{recipeServings} servings</span>        
-          <span className='text-[2.5rem] text-[#f38e82] cursor-pointer'><AiOutlineMinusCircle/></span>        
-          <span onClick={handleClick}  className='text-[2.5rem] text-[#f38e82] cursor-pointer'><IoMdAddCircleOutline/></span>        
+          <span onClick={reduceServings}  className='text-[2.5rem] text-[#f38e82] cursor-pointer'><AiOutlineMinusCircle/></span>        
+          <span onClick={increaseServings}  className='text-[2.5rem] text-[#f38e82] cursor-pointer'><IoMdAddCircleOutline/></span>        
         </div>
       </div>
         
