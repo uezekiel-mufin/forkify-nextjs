@@ -1,6 +1,7 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {BsBookmark} from 'react-icons/bs'
+import {BsBookmarkFill} from 'react-icons/bs'
 import {BsClock} from 'react-icons/bs'
 import {BsPeople} from 'react-icons/bs'
 import {IoMdAddCircleOutline} from 'react-icons/io'
@@ -9,8 +10,9 @@ import {FcCheckmark} from 'react-icons/fc'
 
 
 const RecipeViews = ({recipeDetails, setRecipeDetails, recipeIngredients, setRecipeIngredients, setRecipeServings, recipeServings,bookmark,setBookMark}) => {
-  console.log(recipeIngredients)
-  console.log(recipeDetails)
+const [isClicked,setIsClicked]=useState(false)
+
+
 
 const handleClick=()=>{
 setRecipeIngredients(recipeIngredients.forEach((item)=>(
@@ -19,14 +21,21 @@ setRecipeIngredients(recipeIngredients.forEach((item)=>(
 }
 
 const handleBookmark=()=>{
+if( recipeDetails ){
   bookmark.push(recipeDetails)
-  console.log(bookmark)
+  localStorage.setItem('bookmarks',JSON.stringify(bookmark))
+  setIsClicked(!isClicked)
 }
+}
+
+useEffect(()=>{
+  setIsClicked(false)
+},[recipeDetails])
 
   return (
     <div className='main' >
       <div className='h-[320px] w-full relative'>
-      {/* <Image src={`${recipeDetails?.image}`} alt='sample' width={840} height={310} className=''/> */}
+      <Image src={`${recipeDetails?.image}`} alt='sample' width={840} height={310} className=''/>
        <div className='absolute h-[70.9px] recipe__title bg-bgRecipeTitlepy justify-center text-center items-center px-[2rem]'>
         <span className='text-[3rem] text-center h-full leading-[3rem] '>{recipeDetails?.title}</span>
        </div>
@@ -45,7 +54,9 @@ const handleBookmark=()=>{
         </div>
       </div>
         
-          <span onClick={()=>handleBookmark()} className='text-[2rem] uppercase bg-[#f38e82] text-white p-4 rounded-full cursor-pointer font-bold' ><BsBookmark/></span>           
+          <span onClick={()=>handleBookmark()} className='text-[2rem] uppercase bg-[#f38e82] text-white p-4 rounded-full cursor-pointer font-bold' >
+            {isClicked? <BsBookmarkFill/> :
+            <BsBookmark />}</span>           
       </div>
       <div className=' bg-[#f2efee] py-[3rem] px-[4rem] '>
         <div className=' '>

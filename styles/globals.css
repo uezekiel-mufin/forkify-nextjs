@@ -190,7 +190,10 @@ input :focus{
   row-gap: 1rem;
   position: absolute;
   right: -35px;
-  top: 60px;
+  top: 80px;
   width: 400px;
   z-index: 50000;
+  /* opacity: 0; */
+
 }
+

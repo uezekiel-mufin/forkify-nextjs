@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useLayoutEffect } from 'react'
 import HowToCook from '../public/components/HowToCook'
 import Navbar from '../public/components/Navbar'
 import RecipeViews from '../public/components/RecipeViews'
@@ -22,7 +22,6 @@ const getRecipes =async()=>{
   
   try {
     const response =  await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${searchDetails}`)
-    // const response =  await fetch(`https://forkify-api.herokuapp.com/api/v2/recipe?search=${searchDetails}`)
     const data = await response.json()
     const {recipes} = data.data;
     setFetchedRecipes(recipes)
@@ -32,20 +31,38 @@ const getRecipes =async()=>{
   }
 }
 
+const getLocalStorage=()=>{
+  const storage =localStorage.getItem('bookmarks')
+  if(storage)setBookmark(JSON.parse(storage))
+}
+
+const clearLocalStorage=()=>{
+  localStorage.clear('bookmarks')
+}
+
+
+useLayoutEffect(()=>{
+getLocalStorage()
+clearLocalStorage()
+},[])
+console.log(bookmark)
+
 const getRecipeDetails =async(id)=>{
   try {
     const response = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`)
     const data = await response.json()
     let {recipe} = data.data
+    console.log(recipe)
     recipe={
       time: recipe.cooking_time,
       id: recipe.id,
       image: recipe.image_url,
       ingredients: recipe.ingredients,
       title: recipe.title,
+      publisher:recipe.publisher,
       servings:recipe.servings,
+      source: recipe.source_url
     }
-    console.log(recipe)
     setRecipeDetails(recipe)
     setRecipeIngredients(recipe.ingredients)
     setRecipeServings(recipe.servings)
@@ -57,41 +74,28 @@ const getRecipeDetails =async(id)=>{
 useEffect(()=>{
   searchDetails && getRecipes()
 },[searchDetails])
-console.log(fetchedRecipes)
 
-  // useEffect(()=>{
-  //   const {recipes} = data;
-  //   console.log(recipes)
-  //   setFetchedRecipes(recipes)
-  // },[])
-  // console.log(data)
-  // console.log(fetchedRecipes)
-
+const displayBookmark=(id)=>{
+ const selectedBookmark = bookmark.filter((item)=>(
+  item.id === id)
+  )
+  console.log(selectedBookmark)
+  setRecipeDetails(selectedBookmark[0])
+  setRecipeIngredients(selectedBookmark[0].ingredients)
+  setRecipeServings(selectedBookmark[0].servings)
+}
 
   return (
-    // <div>
-    //  <HomePage/>
-    // </div>
     <div className='relative container min-h-[117rem] m-0  bg-bgContainer py-20 px-60'>
    { modal && <AddRecipe modal={modal} setModal={setModal}/>}
-    <Navbar modal={modal} setModal={setModal} setSearchDetails={setSearchDetails} currentPage={currentPage} setCurrentPage={setCurrentPage} bookmark={bookmark} setBookmark={setBookmark}/>
+    <Navbar modal={modal} setModal={setModal} setSearchDetails={setSearchDetails} currentPage={currentPage} setCurrentPage={setCurrentPage} bookmark={bookmark} setBookmark={setBookmark} displayBookmark={displayBookmark}/>
     <div className='main__section '>
      <SearchResults fetchedRecipes={fetchedRecipes} currentPage={currentPage} setCurrentPage={setCurrentPage} getRecipeDetails={getRecipeDetails}/>
      <section className='main'>
       <RecipeViews recipeDetails={recipeDetails} setRecipeDetails={setRecipeDetails} recipeIngredients={recipeIngredients} setRecipeIngredients={setRecipeIngredients} recipeServings={recipeServings} setRecipeServings={setRecipeServings} bookmark={bookmark} setBookmark={setBookmark} />
-      <HowToCook/>
+      <HowToCook recipeDetails={recipeDetails}/>
     </section>
     </div>
    </div>
   )
 }
-
-// export async function getStaticProps() {
-//   const res = await fetch(`https://forkify-api.herokuapp.com/api/search?q=pizza`)
-//   const data = await res.json()
-//   return {
-//     props: {
-//       data,
-//     },
-//   }
-// }
