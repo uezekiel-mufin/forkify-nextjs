@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import {BsBookmark} from 'react-icons/bs'
 import {BsClock} from 'react-icons/bs'
 import {BsPeople} from 'react-icons/bs'
@@ -8,79 +8,60 @@ import {AiOutlineMinusCircle} from 'react-icons/ai'
 import {FcCheckmark} from 'react-icons/fc'
 
 
-const RecipeViews = () => {
+const RecipeViews = ({recipeDetails, setRecipeDetails, recipeIngredients, setRecipeIngredients, setRecipeServings, recipeServings,bookmark,setBookMark}) => {
+  console.log(recipeIngredients)
+  console.log(recipeDetails)
+
+const handleClick=()=>{
+setRecipeIngredients(recipeIngredients.forEach((item)=>(
+  item.quantity = item.quantity * ((recipeServings + 1) / recipeServings)
+ )))
+}
+
+const handleBookmark=()=>{
+  bookmark.push(recipeDetails)
+  console.log(bookmark)
+}
+
   return (
     <div className='main' >
       <div className='h-[320px] w-full relative'>
-      <Image src='/img/pizza.jpg' alt='sample' width={840} height={310} className=''/>
-       <div className='absolute h-[70.9px] recipe__title bg-bgRecipeTitlepy justify-center items-center px-[2rem]'>
-        <span className='text-[3.25rem] text-center h-full  '>Valentine Pizza</span>
+      {/* <Image src={`${recipeDetails?.image}`} alt='sample' width={840} height={310} className=''/> */}
+       <div className='absolute h-[70.9px] recipe__title bg-bgRecipeTitlepy justify-center text-center items-center px-[2rem]'>
+        <span className='text-[3rem] text-center h-full leading-[3rem] '>{recipeDetails?.title}</span>
        </div>
       </div>
       <div className='h-[155px] flex justify-around items-center '>
       <div className='flex gap-40'>
         <div  className='flex gap-4 items-center'>
           <span className='text-[2.75rem] uppercase text-[#f38e82]'><BsClock/></span>
-          <span className='text-[1.75rem] uppercase'>75 Minutes</span>        
+          <span className='text-[1.75rem] uppercase'>{recipeDetails?.time} Minutes</span>        
         </div >
         <div  className='flex gap-4 items-center'>
           <span className='text-[2.75rem] uppercase text-[#f38e82]'><BsPeople/></span>
-          <span className='text-[1.75rem] uppercase'>4 servings</span>        
-          <span className='text-[2.5rem] text-[#f38e82]'><AiOutlineMinusCircle/></span>        
-          <span className='text-[2.5rem] text-[#f38e82]'><IoMdAddCircleOutline/></span>        
+          <span className='text-[1.75rem] uppercase'>{recipeServings} servings</span>        
+          <span className='text-[2.5rem] text-[#f38e82] cursor-pointer'><AiOutlineMinusCircle/></span>        
+          <span onClick={handleClick}  className='text-[2.5rem] text-[#f38e82] cursor-pointer'><IoMdAddCircleOutline/></span>        
         </div>
       </div>
         
-          <span className='text-[2rem] uppercase bg-[#f38e82] text-white p-4 rounded-full cursor-pointer font-bold' ><BsBookmark/></span>           
+          <span onClick={()=>handleBookmark()} className='text-[2rem] uppercase bg-[#f38e82] text-white p-4 rounded-full cursor-pointer font-bold' ><BsBookmark/></span>           
       </div>
-      <div className=' bg-[#f2efee] py-[3rem] px-[8rem] '>
-        <div className='text-center '>
-          <span className='text-[2rem] text-[#f38e82] uppercase font-bold tracking-[0.3rem]'>recipe ingredients</span>
+      <div className=' bg-[#f2efee] py-[3rem] px-[4rem] '>
+        <div className=' '>
+          <span className='text-[2rem] text-[#f38e82] uppercase flex justify-center mb-8 font-bold tracking-[0.3rem]'>recipe ingredients</span>
           <ul className='  grid grid-cols-2 gap-4 px-4'>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
-            <li className='flex items-center pl-20 gap-4  text-[1.6rem]'>
-              <span><FcCheckmark/></span>
-              <span className='text-[#615551] font-normal'>3 cups of bread flour</span>
-            </li>
+            {recipeIngredients?.map((item,index)=>(
+              <li key={index} className='flex items-start  gap-2  text-[1.6rem]'>
+                 <span><FcCheckmark/></span>
+                {item.quantity && <span className='text-[#615551] font-normal'>{item.quantity}</span>}
+                {item.unit && <span className='text-[#615551] font-normal'>{item.unit}</span>}
+                {item.description && <span className='text-[#615551] font-normal'>{item.description}</span>}
+                 
+              </li>
+            ))}
+         
+            
           </ul>
           </div>
 

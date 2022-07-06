@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 
-const SearchResults = ({fetchedRecipes, currentPage, setCurrentPage}) => {
-  console.log(currentPage)
-  const pageLimit = 10
+const SearchResults = ({fetchedRecipes, currentPage, setCurrentPage, getRecipeDetails}) => {
 
+  const pageLimit = 10
   const start =( currentPage - 1 ) * pageLimit;
   const end = ( start + pageLimit )  ;
-
   const pages = +Math.ceil(fetchedRecipes?.length / (pageLimit))
   const prev =(e)=>{
     const target = e.target;
@@ -24,11 +22,13 @@ const SearchResults = ({fetchedRecipes, currentPage, setCurrentPage}) => {
       }
   }
 
+
+
   return (
   <div className='sidebar'>
     <ul className='flex flex-1 flex-col py-[3rem]'>
      {fetchedRecipes?.slice(start,end).map((item,index)=>(
-        <li key={item.recipe_id}>
+        <li key={item.id} onClick={()=>getRecipeDetails(item.id)}>
           <a  className='flex  gap-8 py-[1.5rem] px-[3.25rem] items-center hover:bg-[#f2efee] cursor-pointer'>
             <Image src={`${item.image_url}`} alt='item__image' width={56} height={56} className='rounded-full'/>
             <div>

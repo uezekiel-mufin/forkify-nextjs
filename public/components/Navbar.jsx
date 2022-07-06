@@ -5,8 +5,10 @@ import {FaRegBookmark } from 'react-icons/fa';
 import {FiEdit } from 'react-icons/fi';
 
 
-const Navbar = ({setSearchDetails,currentPage, setCurrentPage}) => {
+const Navbar = ({setSearchDetails,currentPage, setCurrentPage, modal,setModal, bookmark, setBookmark}) => {
   const [inputText, setInputText]=useState('')
+  const [isOpen,setIsOpen]=useState(false)
+
 
   const handleClick=(e)=>{
     e.preventDefault()
@@ -29,18 +31,33 @@ const Navbar = ({setSearchDetails,currentPage, setCurrentPage}) => {
         <span>Search</span>
       </button>
     </form>
-    <nav className='flex' >
+    <nav className='flex relative' >
         <ul className='flex w-[297.3px] justify-around'>
           <li className='flex cursor-pointer  w-[145px] justify-center gap-4 items-center text-[1.4rem] text-[#615551] font-semibold '>
             <span  className='text-[#f48982]'><FiEdit/></span>
-            <span>Add Recipe</span>
+            <span onClick={()=>setModal(true)}>Add Recipe</span>
           </li>
           <li className='flex cursor-pointer w-[145px] justify-center gap-4 items-center text-[1.4rem] text-[#615551] font-semibold '>
             <span  className='text-[#f48982]'><FaRegBookmark/></span>
-            <span>Bookmarks</span>
+            <span onMouseOver={()=>setIsOpen(true)} >Bookmarks</span>
           </li>
           
         </ul>
+        {isOpen &&
+        <ul className='bookmark'>
+          {bookmark.map((item)=>(
+            <li key={item.id} onClick={()=>getRecipeDetails(item.id)}>
+              <a  className='flex  gap-8 py-[1.5rem] px-[3.25rem] items-center hover:bg-[#f2efee] cursor-pointer'>
+                <Image src={`${item.image}`} alt='item__image' width={56} height={56} className='rounded-full'/>
+                <div>
+                <h3 className='text-[#f38e82] max-w-[15rem] text-[1.45rem] overflow-hidden text-ellipsis whitespace-nowrap uppercase'>{item.title}</h3>
+                <h2 className='text-[#918581] text-[1.15rem] uppercase font-semibold'>{item.publisher}</h2>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+        }
      </nav>
    </div>
   )

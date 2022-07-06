@@ -7,7 +7,8 @@ module.exports = {
         'bgContainer': "linear-gradient(to right bottom, #fbdb89, #f48982)",
         'bgHeaderButton':"linear-gradient(to right bottom,#fbdb89,#f48982)",
         'bgRecipeTitle':"linear-gradient(to right bottom,#fbdb89,#f48982)",
-        'bgDirectionBtn':'linear-gradient(to right bottom, rgb(251, 219, 137), rgb(244, 137, 130))'
+        'bgDirectionBtn':'linear-gradient(to right bottom, rgb(251, 219, 137), rgb(244, 137, 130))',
+        'bgUploadBtn':'linear-gradient(to right bottom, rgb(251, 219, 137), rgb(244, 137, 130))',
   
       },
       color:{
