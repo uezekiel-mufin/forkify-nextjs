@@ -15,6 +15,7 @@ export default function Home() {
   const [recipeServings, setRecipeServings]=useState(undefined)
   const [modal,setModal]=useState(false)
   const [bookmark,setBookmark]=useState([])
+
  
 
 console.log(searchDetails)
@@ -70,6 +71,7 @@ const getRecipeDetails =async(id)=>{
     console.log(error)
   }
 }
+console.log(recipeIngredients)
 
 useEffect(()=>{
   searchDetails && getRecipes()

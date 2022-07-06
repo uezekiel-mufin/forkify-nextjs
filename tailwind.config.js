@@ -9,6 +9,7 @@ module.exports = {
         'bgRecipeTitle':"linear-gradient(to right bottom,#fbdb89,#f48982)",
         'bgDirectionBtn':'linear-gradient(to right bottom, rgb(251, 219, 137), rgb(244, 137, 130))',
         'bgUploadBtn':'linear-gradient(to right bottom, rgb(251, 219, 137), rgb(244, 137, 130))',
+        'bgImage':'linear-gradient(to right bottom,#fbdb89,#f48982)',
   
       },
       color:{

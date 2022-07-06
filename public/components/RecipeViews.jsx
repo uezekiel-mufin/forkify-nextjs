@@ -13,13 +13,21 @@ const RecipeViews = ({recipeDetails, setRecipeDetails, recipeIngredients, setRec
 const [isClicked,setIsClicked]=useState(false)
 
 
+//changing the quantity of the ingredients when the servings changes
 
 const handleClick=()=>{
-setRecipeIngredients(recipeIngredients.forEach((item)=>(
-  item.quantity = item.quantity * ((recipeServings + 1) / recipeServings)
- )))
+  setRecipeServings((prev)=>prev+1)
+  recipeIngredients.forEach((item)=>{
+  // item.quantity = Math.ceil( item.quantity * ((recipeServings + 1) / recipeServings))
+  item.quantity =  (item.quantity * ((recipeServings + 1) / recipeServings)).toFixed(2)
+})
+console.log(recipeIngredients)
 }
 
+
+
+
+// Bookmarking Items
 const handleBookmark=()=>{
 if( recipeDetails ){
   bookmark.push(recipeDetails)
@@ -28,14 +36,15 @@ if( recipeDetails ){
 }
 }
 
+//Removing the clicked functionality from the bookmarking symbol when a new recipe displays
 useEffect(()=>{
   setIsClicked(false)
 },[recipeDetails])
 
   return (
-    <div className='main' >
-      <div className='h-[320px] w-full relative'>
-      <Image src={`${recipeDetails?.image}`} alt='sample' width={840} height={310} className=''/>
+    <div className='main'>
+      <div className=' w-full relative'>
+      <Image src={recipeDetails? `${recipeDetails?.image}` : '/public/img/logo.png'} alt='sample' width={840} height={400 }  className='object-cover before:bg-bgImage before:block before:absolute before:-inset-1 h-full w-full relative inline-block'/>
        <div className='absolute h-[70.9px] recipe__title bg-bgRecipeTitlepy justify-center text-center items-center px-[2rem]'>
         <span className='text-[3rem] text-center h-full leading-[3rem] '>{recipeDetails?.title}</span>
        </div>
