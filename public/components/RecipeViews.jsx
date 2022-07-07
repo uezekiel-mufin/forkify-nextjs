@@ -20,9 +20,9 @@ const RecipeViews = ({
   recipeServings,
   bookmark,
   setBookMark,
+  isClicked,
+  setIsClicked,
 }) => {
-  const [isClicked, setIsClicked] = useState(false);
-
   //changing the quantity of the ingredients when the servings changes
 
   const increaseServings = () => {
@@ -54,20 +54,20 @@ const RecipeViews = ({
     bookmark.push(recipeDetails);
     alert(`Your Recipe has been added to your bookmark!!!`);
     localStorage.setItem("bookmarks", JSON.stringify(bookmark));
-    setIsClicked(!isClicked);
+    // setIsClicked(!isClicked);
   };
 
   //Removing the clicked functionality from the bookmarking symbol when a new recipe displays
-  useEffect(() => {
-    setIsClicked(false);
-  }, [recipeDetails]);
+  // useEffect(() => {
+  //   // setIsClicked(false);
+  // }, [recipeDetails]);
 
   const override = {
     display: "block",
     margin: "0 auto",
     borderColor: "red",
   };
-
+  console.log(isClicked);
   return (
     <div className="main">
       <div className=" justify-center opacity-70 relative h-[400px]">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-
+import { BsCloudUpload } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 
 const AddRecipe = ({ setModal, handleUpload }) => {
@@ -179,9 +179,14 @@ const AddRecipe = ({ setModal, handleUpload }) => {
               </div>
             </div>
           </div>
-          <button className="flex mt-[3rem] text-[1.5rem] font-semibold px-[4rem] py-[1.5rem] bg-bgUploadBtn text-white rounded-[10rem] text-center justify-items-center">
-            Upload
-          </button>
+          <div className="flex justify-center">
+            <button className="flex mt-[3rem] w-[150px] items-center gap-2  text-[1.7rem] font-semibold px-[4rem] py-[1.5rem] bg-bgUploadBtn uppercase text-white rounded-[10rem] text-center justify-center">
+              <span className="text-[2rem]">
+                <BsCloudUpload />
+              </span>
+              <span>Upload</span>
+            </button>
+          </div>
         </form>
       </div>
     </div>

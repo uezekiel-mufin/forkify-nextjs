@@ -16,6 +16,7 @@ export default function Home() {
   const [bookmark, setBookmark] = useState([]);
   const [loader, setLoader] = useState(true);
   const [newRecipeData, setNewRecipeData] = useState(undefined);
+  const [isClicked, setIsClicked] = useState(false);
 
   //a function to format the individual recipe object gotten from the API into useful data
   const createRecipeData = (newRecipe) => {
@@ -66,7 +67,7 @@ export default function Home() {
       let { recipe } = data.data;
 
       const newrecipe = createRecipeData(recipe);
-
+      markBookmarked(newrecipe);
       setRecipeDetails(newrecipe);
       setRecipeIngredients(newrecipe.ingredients);
       recipe && setLoader(true);
@@ -82,10 +83,10 @@ export default function Home() {
 
   const displayBookmark = (id) => {
     const selectedBookmark = bookmark.filter((item) => item.id === id);
-    console.log(selectedBookmark);
     setRecipeDetails(selectedBookmark[0]);
     setRecipeIngredients(selectedBookmark[0].ingredients);
     setRecipeServings(selectedBookmark[0].servings);
+    markBookmarked(selectedBookmark[0]);
   };
 
   //A functionality to uploading new recipe and setting the newRecipe to the current recipe displayed
@@ -148,6 +149,13 @@ export default function Home() {
     }
   };
 
+  const markBookmarked = (bookmarkRecipe) => {
+    console.log(bookmark.some((item) => item.id === bookmarkRecipe.id));
+    bookmark.some((item) => item.id === bookmarkRecipe.id)
+      ? setIsClicked(true)
+      : setIsClicked(false);
+  };
+
   return (
     <div className="relative container min-h-[117rem] m-0  bg-bgContainer py-20 px-60">
       {modal && (
@@ -177,6 +185,7 @@ export default function Home() {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           getRecipeDetails={getRecipeDetails}
+          markBookmarked={markBookmarked}
         />
 
         <section className="main">
@@ -190,6 +199,8 @@ export default function Home() {
             setRecipeServings={setRecipeServings}
             bookmark={bookmark}
             setBookmark={setBookmark}
+            isClicked={isClicked}
+            setIsClicked={setIsClicked}
           />
           <HowToCook recipeDetails={recipeDetails} />
         </section>
