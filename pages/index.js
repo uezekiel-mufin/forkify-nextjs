@@ -3,8 +3,8 @@ import HowToCook from '../public/components/HowToCook'
 import Navbar from '../public/components/Navbar'
 import RecipeViews from '../public/components/RecipeViews'
 import SearchResults from '../public/Components/SearchResults'
-import HomePage from './HomePage'
 import AddRecipe from '../public/components/AddRecipe'
+
 
 export default function Home() {
   const [searchDetails,setSearchDetails]=useState('')
@@ -15,6 +15,7 @@ export default function Home() {
   const [recipeServings, setRecipeServings]=useState(undefined)
   const [modal,setModal]=useState(false)
   const [bookmark,setBookmark]=useState([])
+  const [loader, setLoader]=useState(true)
 
  
 
@@ -44,11 +45,11 @@ const clearLocalStorage=()=>{
 
 useLayoutEffect(()=>{
 getLocalStorage()
-clearLocalStorage()
 },[])
 console.log(bookmark)
 
 const getRecipeDetails =async(id)=>{
+  setLoader(false)
   try {
     const response = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`)
     const data = await response.json()
@@ -66,6 +67,7 @@ const getRecipeDetails =async(id)=>{
     }
     setRecipeDetails(recipe)
     setRecipeIngredients(recipe.ingredients)
+    recipe && setLoader(true)
     setRecipeServings(recipe.servings)
   } catch (error) {
     console.log(error)
@@ -90,13 +92,16 @@ const displayBookmark=(id)=>{
   return (
     <div className='relative container min-h-[117rem] m-0  bg-bgContainer py-20 px-60'>
    { modal && <AddRecipe modal={modal} setModal={setModal}/>}
+
     <Navbar modal={modal} setModal={setModal} setSearchDetails={setSearchDetails} currentPage={currentPage} setCurrentPage={setCurrentPage} bookmark={bookmark} setBookmark={setBookmark} displayBookmark={displayBookmark}/>
+
     <div className='main__section '>
      <SearchResults fetchedRecipes={fetchedRecipes} currentPage={currentPage} setCurrentPage={setCurrentPage} getRecipeDetails={getRecipeDetails}/>
+
      <section className='main'>
-      <RecipeViews recipeDetails={recipeDetails} setRecipeDetails={setRecipeDetails} recipeIngredients={recipeIngredients} setRecipeIngredients={setRecipeIngredients} recipeServings={recipeServings} setRecipeServings={setRecipeServings} bookmark={bookmark} setBookmark={setBookmark} />
+      <RecipeViews loader={loader} recipeDetails={recipeDetails} setRecipeDetails={setRecipeDetails} recipeIngredients={recipeIngredients} setRecipeIngredients={setRecipeIngredients} recipeServings={recipeServings} setRecipeServings={setRecipeServings} bookmark={bookmark} setBookmark={setBookmark} />
       <HowToCook recipeDetails={recipeDetails}/>
-    </section>
+      </section>
     </div>
    </div>
   )
