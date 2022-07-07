@@ -64,9 +64,9 @@ export default function Home() {
       );
       const data = await response.json();
       let { recipe } = data.data;
-      console.log(recipe);
+
       const newrecipe = createRecipeData(recipe);
-      console.log(newrecipe);
+
       setRecipeDetails(newrecipe);
       setRecipeIngredients(newrecipe.ingredients);
       recipe && setLoader(true);
