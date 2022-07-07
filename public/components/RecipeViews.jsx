@@ -33,7 +33,6 @@ const RecipeViews = ({
         ((recipeServings + 1) / recipeServings)
       ).toFixed(2);
     });
-    console.log(recipeIngredients);
   };
   const reduceServings = () => {
     setRecipeServings((prev) => prev - 1);
@@ -43,16 +42,19 @@ const RecipeViews = ({
         ((recipeServings - 1) / recipeServings)
       ).toFixed(2);
     });
-    console.log(recipeIngredients);
   };
 
   // Bookmarking Items
   const handleBookmark = () => {
-    if (recipeDetails) {
-      bookmark.push(recipeDetails);
-      localStorage.setItem("bookmarks", JSON.stringify(bookmark));
-      setIsClicked(!isClicked);
+    // console.log(bookmark.includes(recipeDetails.id));
+    if (bookmark.some((item) => item.id === recipeDetails.id)) {
+      alert(`This Recipe is already in the bookmark`);
+      return;
     }
+    bookmark.push(recipeDetails);
+    alert(`Your Recipe has been added to your bookmark!!!`);
+    localStorage.setItem("bookmarks", JSON.stringify(bookmark));
+    setIsClicked(!isClicked);
   };
 
   //Removing the clicked functionality from the bookmarking symbol when a new recipe displays
@@ -68,7 +70,7 @@ const RecipeViews = ({
 
   return (
     <div className="main">
-      <div className=" justify-center  relative h-[400px]">
+      <div className=" justify-center opacity-70 relative h-[400px]">
         {loader ? (
           <Image
             src={
@@ -77,7 +79,7 @@ const RecipeViews = ({
             alt="sample"
             width={840}
             height={400}
-            className="object-cover before:bg-bgImage before:block before:absolute before:-inset-1 h-full w-full relative inline-block"
+            className="object-cover before:bg-bgImage before:block before:absolute before:-inset-1 h-full w-full relative inline-block "
           />
         ) : (
           <FadeLoader
@@ -89,7 +91,7 @@ const RecipeViews = ({
             cssOverride={override}
           />
         )}
-        <div className="absolute h-[70.9px] recipe__title bg-bgRecipeTitlepy justify-center text-center items-center px-[2rem]">
+        <div className="absolute py-[1rem] recipe__title bg-bgRecipeTitlepy justify-center text-center items-center px-[2rem]">
           <span className="text-[3rem] text-center h-full leading-[3rem] ">
             {recipeDetails?.title}
           </span>
