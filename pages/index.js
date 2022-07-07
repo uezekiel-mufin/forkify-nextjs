@@ -90,6 +90,7 @@ export default function Home() {
 
   //A functionality to uploading new recipe and setting the newRecipe to the current recipe displayed
   const handleUpload = (newRecipe) => {
+    setModal(!modal);
     setNewRecipeData(newRecipe);
     const uploadIngredients =
       newRecipeData &&
