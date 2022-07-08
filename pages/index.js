@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import HowToCook from "../public/components/HowToCook";
 import Navbar from "../public/components/Navbar";
 import RecipeViews from "../public/components/RecipeViews";
@@ -34,7 +34,7 @@ export default function Home() {
   };
 
   // a function to get lists of recipes from the search input
-  const getRecipes = async () => {
+  const getRecipes = useCallback(async () => {
     try {
       const response = await fetch(
         `https://forkify-api.herokuapp.com/api/v2/recipes?search=${searchDetails}`
@@ -45,7 +45,10 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [searchDetails]);
+  useEffect(() => {
+    searchDetails && getRecipes();
+  }, [searchDetails, getRecipes]);
 
   //a function to get saved bookmark stored in the local storage on page load
   const getLocalStorage = () => {
@@ -53,7 +56,7 @@ export default function Home() {
     if (storage) setBookmark(JSON.parse(storage));
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     getLocalStorage();
     // localStorage.clear("bookmarks");
   }, []);
@@ -77,10 +80,6 @@ export default function Home() {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    searchDetails && getRecipes();
-  }, [searchDetails]);
 
   const displayBookmark = (id) => {
     const selectedBookmark = bookmark.filter((item) => item.id === id);

@@ -29,7 +29,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                   Title
                 </label>
                 <input
-                  defaultValue="food"
+                  placeholder="title of your recipe"
                   {...register("Title")}
                   id="title"
                   type="text"
@@ -41,7 +41,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                   Url
                 </label>{" "}
                 <input
-                  defaultValue="food@mind.com"
+                  placeholder="your weblink"
                   {...register("Source_url")}
                   id="url"
                   type="text"
@@ -53,7 +53,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                   Image
                 </label>{" "}
                 <input
-                  defaultValue="http://forkify-api.herokuapp.com/images/BBQChickenPizzawithCauliflowerCrust5004699695624ce.jpg"
+                  placeholder="image url"
                   {...register("image_url")}
                   id="image"
                   type="text"
@@ -65,7 +65,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                   Publisher
                 </label>{" "}
                 <input
-                  defaultValue="foodezzy"
+                  placeholder="PPublisher name"
                   {...register("Publisher")}
                   id="publisher"
                   type="text"
@@ -77,10 +77,10 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                   Time
                 </label>{" "}
                 <input
-                  defaultValue="60"
+                  placeholder="time it takes to cook"
                   {...register("time")}
                   id="prep__time"
-                  type="text"
+                  type="number"
                   className="text-[1.5rem] py-[0.8rem] px-[1rem] border-2 border-solid border-[#dddddd] rounded-lg transition-all duration-200 ease-in-out focus:bg-[#dddddd] focus:border-orange-600"
                 />
               </div>
@@ -89,10 +89,10 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                   Servings
                 </label>{" "}
                 <input
-                  defaultValue="4"
+                  placeholder="no of persons your ingredients are for"
                   {...register("Servings")}
                   id="servings"
-                  type="text"
+                  type="number"
                   className="text-[1.5rem] py-[0.8rem] px-[1rem] border-2 border-solid border-[#dddddd] rounded-lg transition-all duration-200 ease-in-outfocus:bg-[#dddddd] focus:border-orange-600"
                 />
               </div>
@@ -107,7 +107,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                   Ingredients 1
                 </label>
                 <input
-                  defaultValue="34,kg,food"
+                  placeholder="format: quantity,unit,description"
                   {...register("ingredient 1")}
                   id="ingredient1"
                   type="text"
@@ -119,7 +119,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                   Ingredients 2
                 </label>
                 <input
-                  defaultValue="3,er,jhd"
+                  placeholder="format: quantity,unit,description"
                   {...register("ingredient 2")}
                   id="ingredient2"
                   type="text"
@@ -131,7 +131,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                   Ingredients 3
                 </label>
                 <input
-                  defaultValue="2,ooof,osijdh"
+                  placeholder="format: quantity,unit,description"
                   {...register("ingredient 3")}
                   id="ingredient3"
                   type="text"
@@ -145,7 +145,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                 </label>
                 <input
                   {...register("ingredient 4")}
-                  placeholder="format,quantity,unit,description"
+                  placeholder="format: quantity,unit,description"
                   id="ingredient4"
                   type="text"
                   className="recipe__input text-[1.5rem] py-[0.8rem] px-[1rem] border-2 border-solid border-[#dddddd] rounded-lg transition-all duration-200 ease-in-out focus:bg-[#dddddd] focus:border-orange-600"
@@ -158,7 +158,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                 </label>
                 <input
                   {...register("ingredient 5")}
-                  placeholder="format,quantity,unit,description"
+                  placeholder="format: quantity,unit,description"
                   id="ingredient5"
                   type="text"
                   className="recipe__input text-[1.5rem] py-[0.8rem] px-[1rem] border-2 border-solid border-[#dddddd] rounded-lg transition-all duration-200 ease-in-out focus:bg-[#dddddd] focus:border-orange-600"
@@ -171,7 +171,7 @@ const AddRecipe = ({ setModal, handleUpload }) => {
                 </label>
                 <input
                   {...register("ingredient 6")}
-                  placeholder="format,quantity,unit,description"
+                  placeholder="format: quantity,unit,description"
                   id="ingredient6"
                   type="text"
                   className="recipe__input text-[1.5rem] py-[0.8rem] px-[1rem] border-2 border-solid border-[#dddddd] rounded-lg transition-all duration-200 ease-in-out focus:bg-[#dddddd] focus:border-orange-600"
