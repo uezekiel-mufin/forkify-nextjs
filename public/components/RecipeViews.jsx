@@ -7,24 +7,18 @@ import { BsPeople } from "react-icons/bs";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { FcCheckmark } from "react-icons/fc";
-import { SpinnerDiamond } from "spinners-react";
 import FadeLoader from "react-spinners/FadeLoader";
 
 const RecipeViews = ({
   loader,
   recipeDetails,
-  setRecipeDetails,
   recipeIngredients,
-  setRecipeIngredients,
   setRecipeServings,
   recipeServings,
-  bookmark,
-  setBookMark,
   isClicked,
-  setIsClicked,
+  handleBookmark,
 }) => {
   //changing the quantity of the ingredients when the servings changes
-
   const increaseServings = () => {
     setRecipeServings((prev) => prev + 1);
     recipeIngredients.forEach((item) => {
@@ -44,24 +38,6 @@ const RecipeViews = ({
     });
   };
 
-  // Bookmarking Items
-  const handleBookmark = () => {
-    // console.log(bookmark.includes(recipeDetails.id));
-    if (bookmark.some((item) => item.id === recipeDetails.id)) {
-      alert(`This Recipe is already in the bookmark`);
-      return;
-    }
-    bookmark.push(recipeDetails);
-    alert(`Your Recipe has been added to your bookmark!!!`);
-    localStorage.setItem("bookmarks", JSON.stringify(bookmark));
-    // setIsClicked(!isClicked);
-  };
-
-  //Removing the clicked functionality from the bookmarking symbol when a new recipe displays
-  // useEffect(() => {
-  //   // setIsClicked(false);
-  // }, [recipeDetails]);
-
   const override = {
     display: "block",
     margin: "0 auto",
@@ -70,14 +46,14 @@ const RecipeViews = ({
   console.log(isClicked);
   return (
     <div className="main">
-      <div className=" justify-center opacity-70 relative h-[400px]">
+      <div className="w-full justify-center opacity-70 relative h-[400px]">
         {loader ? (
           <Image
             src={
               recipeDetails ? `${recipeDetails?.image}` : "/public/img/logo.png"
             }
             alt="sample"
-            width={840}
+            width={1000}
             height={400}
             className="object-cover before:bg-bgImage before:block before:absolute before:-inset-1 h-full w-full relative inline-block "
           />

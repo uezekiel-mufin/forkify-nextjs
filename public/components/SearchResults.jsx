@@ -40,7 +40,7 @@ const SearchResults = ({
                 className="rounded-full"
               />
               <div>
-                <h3 className="text-[#f38e82] max-w-[15rem] text-[1.45rem] overflow-hidden text-ellipsis whitespace-nowrap uppercase">
+                <h3 className="text-[#f38e82] max-w-[25rem] text-[1.45rem] overflow-hidden text-ellipsis whitespace-nowrap uppercase">
                   {item.title}
                 </h3>
                 <h2 className="text-[#918581] text-[1.15rem] uppercase font-semibold">

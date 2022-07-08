@@ -55,6 +55,7 @@ export default function Home() {
 
   useLayoutEffect(() => {
     getLocalStorage();
+    // localStorage.clear("bookmarks");
   }, []);
 
   const getRecipeDetails = async (id) => {
@@ -144,6 +145,8 @@ export default function Home() {
 
       //setting the uploaded recipe to the current recipe to be displayed in the view
       setRecipeDetails(uploadedRecipeDetail);
+      bookmark.push(uploadedRecipeDetail);
+      markBookmarked(uploadedRecipeDetail);
     } catch (error) {
       console.error(error);
     }
@@ -155,9 +158,33 @@ export default function Home() {
       ? setIsClicked(true)
       : setIsClicked(false);
   };
+  // Bookmarking Items
+  const handleBookmark = () => {
+    console.log(bookmark);
+    if (bookmark.some((item) => item.id === recipeDetails.id)) {
+      const index = bookmark.findIndex((item) => item.id === recipeDetails.id);
+      console.log(index);
+      bookmark.splice(index, 1);
+      console.log(bookmark);
+      setRecipeDetails(undefined);
+      setRecipeIngredients([]);
+      setRecipeServings(undefined);
+      setIsClicked(!isClicked);
+      setTimeout(() => {
+        alert(`You just removed this recipe from your bookmark`);
+      }, 1000);
+      return;
+    }
+    bookmark.push(recipeDetails);
+    setTimeout(() => {
+      alert(`Your Recipe has been added to your bookmark!!!`);
+    }, 1000);
+    localStorage.setItem("bookmarks", JSON.stringify(bookmark));
+    setIsClicked(!isClicked);
+  };
 
   return (
-    <div className="relative container min-h-[117rem] m-0  bg-bgContainer py-20 px-60">
+    <div className="relative containerApp min-h-[117rem] bg-bgContainer py-20 px-60">
       {modal && (
         <AddRecipe
           modal={modal}
@@ -201,6 +228,7 @@ export default function Home() {
             setBookmark={setBookmark}
             isClicked={isClicked}
             setIsClicked={setIsClicked}
+            handleBookmark={handleBookmark}
           />
           <HowToCook recipeDetails={recipeDetails} />
         </section>
