@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import HowToCook from "../public/components/HowToCook";
-import Navbar from "../public/components/Navbar";
-import RecipeViews from "../public/components/RecipeViews";
+import HowToCook from "../public/Components/HowToCook";
+import Navbar from "../public/Components/Navbar";
+import RecipeViews from "../public/Components/RecipeViews";
 import SearchResults from "../public/Components/SearchResults";
-import AddRecipe from "../public/components/AddRecipe";
+import AddRecipe from "../public/Components/AddRecipe";
 
 export default function Home() {
   const [searchDetails, setSearchDetails] = useState("");
