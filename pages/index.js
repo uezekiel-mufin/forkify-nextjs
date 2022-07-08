@@ -80,7 +80,7 @@ export default function Home() {
 
   useEffect(() => {
     searchDetails && getRecipes();
-  }, [searchDetails]);
+  }, [searchDetails, getRecipes]);
 
   const displayBookmark = (id) => {
     const selectedBookmark = bookmark.filter((item) => item.id === id);
