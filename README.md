@@ -18,7 +18,7 @@
 
 ## Working Demo
 
-- A preview of the working demo can be seen <a href=''>here</a>
+- A preview of the working demo can be seen <a href='https://forkify-e2.netlify.app/'>here</a>
 
 ## Available search queries
 
