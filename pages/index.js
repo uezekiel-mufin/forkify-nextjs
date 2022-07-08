@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useState, useEffect, useCallback } from "react";
+=======
+import { useState, useEffect, useLayoutEffect, useCallback } from "react";
+>>>>>>> 5024317418480448b2ff57103dc189757d9f085a
 import HowToCook from "../public/components/HowToCook";
 import Navbar from "../public/components/Navbar";
 import RecipeViews from "../public/components/RecipeViews";
@@ -46,6 +50,10 @@ export default function Home() {
       console.log(error);
     }
   }, [searchDetails]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5024317418480448b2ff57103dc189757d9f085a
   useEffect(() => {
     searchDetails && getRecipes();
   }, [searchDetails, getRecipes]);
@@ -80,7 +88,9 @@ export default function Home() {
       console.log(error);
     }
   };
+}
 
+<<<<<<< HEAD
   const displayBookmark = (id) => {
     const selectedBookmark = bookmark.filter((item) => item.id === id);
     setRecipeDetails(selectedBookmark[0]);
@@ -88,6 +98,18 @@ export default function Home() {
     setRecipeServings(selectedBookmark[0].servings);
     markBookmarked(selectedBookmark[0]);
   };
+=======
+// useEffect(() => {
+//   searchDetails && getRecipes();
+// }, [searchDetails]);
+
+const displayBookmark = (id) => {
+  const selectedBookmark = bookmark.filter((item) => item.id === id);
+  setRecipeDetails(selectedBookmark[0]);
+  setRecipeIngredients(selectedBookmark[0].ingredients);
+  setRecipeServings(selectedBookmark[0].servings);
+  markBookmarked(selectedBookmark[0]);
+>>>>>>> 5024317418480448b2ff57103dc189757d9f085a
 
   //A functionality to uploading new recipe and setting the newRecipe to the current recipe displayed
   const handleUpload = (newRecipe) => {
@@ -234,4 +256,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};

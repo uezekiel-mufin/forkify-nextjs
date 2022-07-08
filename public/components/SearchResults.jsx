@@ -6,7 +6,6 @@ const SearchResults = ({
   currentPage,
   setCurrentPage,
   getRecipeDetails,
-  markBookmarked,
 }) => {
   const pageLimit = 10;
   const start = (currentPage - 1) * pageLimit;
