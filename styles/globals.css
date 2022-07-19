@@ -57,6 +57,13 @@ html {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
+
+@media (max-width: 600px) {
+  .header {
+    padding: 2rem;
+  }
+}
+
 .bookmark {
   display: none;
   flex-direction: column;
@@ -81,7 +88,14 @@ html {
   transition: all 0.3s;
   margin: 10px;
   width: 503px;
-  height: 53px;
+  height: 40px;
+}
+
+@media (max-width: 600px) {
+  .search {
+    height: 30px;
+    width: 200px;
+  }
 }
 
 .nav {

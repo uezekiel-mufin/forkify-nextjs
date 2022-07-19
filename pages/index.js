@@ -183,7 +183,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative containerApp min-h-[117rem] bg-bgContainer py-20 px-60">
+    <div className='relative containerApp min-h-[117rem] bg-bgContainer md:py-20 md:px-20 py-[2rem] px-[2rem]'>
       {modal && (
         <AddRecipe
           modal={modal}
@@ -205,7 +205,7 @@ export default function Home() {
         displayBookmark={displayBookmark}
       />
 
-      <div className="main__section ">
+      <div className='main__section '>
         <SearchResults
           fetchedRecipes={fetchedRecipes}
           currentPage={currentPage}
@@ -214,7 +214,7 @@ export default function Home() {
           markBookmarked={markBookmarked}
         />
 
-        <section className="main">
+        <section className='main'>
           <RecipeViews
             loader={loader}
             recipeDetails={recipeDetails}
