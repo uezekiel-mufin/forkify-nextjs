@@ -35,6 +35,12 @@ const Navbar = ({
   };
 
   const handleMenu = () => {
+    const el = document.querySelector(".navigation");
+    const elShow = document.querySelector(".navigation__show");
+    console.log(el);
+    console.log(el.classList.contains("navigation"));
+    el.classList.remove("navigation");
+    elShow.classList.add("navigation__show");
     setIsMenu(!isMenu);
   };
   return (
@@ -71,7 +77,7 @@ const Navbar = ({
             <AiOutlineMenuFold style={{ fontSize: "3.5rem" }} />
           </span>
         )}
-        <ul className='invisible md:visible flex w-[297.3px] justify-around'>
+        <ul className='navigation'>
           <li className='flex cursor-pointer  w-[145px] justify-center gap-4 items-center text-[1.4rem] text-[#615551] font-semibold '>
             <span className='text-[#f48982]'>
               <FiEdit />

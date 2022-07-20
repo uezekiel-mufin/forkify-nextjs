@@ -90,11 +90,29 @@ html {
   width: 503px;
   height: 40px;
 }
+.navigation {
+  display: flex;
+  width: 297.3px;
+  justify-content: space-around;
+}
 
 @media (max-width: 600px) {
   .search {
     height: 30px;
     width: 200px;
+  }
+
+  .navigation {
+    display: none;
+  }
+
+  .navigation__show {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    width: 150px;
+    top: 65px;
   }
 }
 
@@ -107,6 +125,14 @@ html {
   display: grid;
   grid-template-columns: 33% 67%;
   width: 100%;
+}
+
+@media (max-width: 600px) {
+  .main__section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+  }
 }
 
 .sidebar {
@@ -131,6 +157,13 @@ html {
   transform: skewY(-6deg);
   width: 35%;
   color: white;
+}
+
+@media (max-width: 600px) {
+  .recipe__title {
+    width: 80%;
+    left: 10%;
+  }
 }
 
 .modal__container {

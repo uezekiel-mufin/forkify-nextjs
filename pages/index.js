@@ -183,7 +183,7 @@ export default function Home() {
   };
 
   return (
-    <div className='relative containerApp min-h-[117rem] bg-bgContainer md:py-20 md:px-20 py-[2rem] px-[2rem]'>
+    <div className='relative containerApp min-h-[117rem] bg-bgContainer md:py-20 md:px-20 py-[2rem] px-[1rem]'>
       {modal && (
         <AddRecipe
           modal={modal}
